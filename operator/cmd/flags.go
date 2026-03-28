@@ -247,6 +247,11 @@ func InitGlobalFlags(logger *slog.Logger, cmd *cobra.Command, vp *viper.Viper) {
 	flags.MarkHidden(option.EnableCiliumClusterwideNetworkPolicy)
 	option.BindEnv(vp, option.EnableCiliumClusterwideNetworkPolicy)
 
+	// Options for Cilium QoS
+
+	flags.Bool(option.EnableCiliumQoSPolicy, defaults.EnableCiliumQoSPolicy, "Enable support for Cilium QoS policy")
+	option.BindEnv(vp, option.EnableCiliumQoSPolicy)
+
 	// Options used for policy validation
 
 	flags.Bool(option.EnableL7Proxy, defaults.EnableL7Proxy, "Enable L7 proxy for L7 policy enforcement")

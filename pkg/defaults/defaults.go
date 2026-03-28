@@ -488,6 +488,9 @@ const (
 	// Network Policy.
 	EnableCiliumClusterwideNetworkPolicy = true
 
+	// EnableCiliumQoSPolicy enables support for Cilium QoS Policy.
+	EnableCiliumQoSPolicy = false
+
 	// MaxConnectedClusters sets the maximum number of clusters that can be
 	// connected in a clustermesh.
 	// The value is used to determine the bit allocation for cluster ID and

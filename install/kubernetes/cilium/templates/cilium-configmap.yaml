@@ -210,6 +210,10 @@ data:
 {{- end}}
 
 
+{{- if .Values.qos.enabled }}
+  enable-cilium-qos-policy: {{ .Values.qos.enabled | quote }}
+{{- end }}
+
 {{- if .Values.prometheus.enabled }}
   # If you want metrics enabled in all of your Cilium agents, set the port for
   # which the Cilium agents will have their metrics exposed.

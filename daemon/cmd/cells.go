@@ -81,6 +81,7 @@ import (
 	policyK8s "github.com/cilium/cilium/pkg/policy/k8s"
 	"github.com/cilium/cilium/pkg/pprof"
 	"github.com/cilium/cilium/pkg/proxy"
+	qosK8s "github.com/cilium/cilium/pkg/qos/k8s"
 	"github.com/cilium/cilium/pkg/signal"
 	"github.com/cilium/cilium/pkg/source"
 	"github.com/cilium/cilium/pkg/status"
@@ -299,6 +300,9 @@ var (
 
 		// Directory policy watcher cell.
 		policyDirectory.Cell,
+
+		// K8s QoS Policy Watcher Cell
+		qosK8s.Cell,
 
 		// ClusterMesh is the Cilium's multicluster implementation.
 		cell.Config(cmtypes.DefaultClusterInfo),

@@ -1,0 +1,44 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: test
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-netshoot
+  namespace: test
+  labels:
+    app: nginx-netshoot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-netshoot
+  template:
+    metadata:
+      labels:
+        app: nginx-netshoot
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.14.2
+          ports:
+            - containerPort: 80
+        - name: netshoot
+          image: nicolaka/netshoot
+          command: ["/bin/bash"]
+          args: ["-c", "while true; do ping localhost; sleep 60;done"]
+---
+apiVersion: cilium.io/v2alpha1
+kind: CiliumQoSPolicy
+metadata:
+  namespace: test
+  name: voice
+spec:
+  podSelector:
+    matchLabels:
+      app: nginx-netshoot
+  dscp:
+    value: 46

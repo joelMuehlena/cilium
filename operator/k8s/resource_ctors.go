@@ -159,3 +159,16 @@ func EndpointsResource(logger *slog.Logger, lc cell.Lifecycle, cfg k8s.ConfigPar
 		mp,
 	)
 }
+
+// FIXME:
+func CiliumQoSPolicyResource(lc cell.Lifecycle, cs client.Clientset, mp workqueue.MetricsProvider, opts ...func(*metav1.ListOptions)) (resource.Resource[*cilium_api_v2alpha1.CiliumQoSPolicy], error) {
+	if !cs.IsEnabled() {
+		return nil, nil
+	}
+
+	lw := utils.ListerWatcherWithModifiers(
+		utils.ListerWatcherFromTyped[*cilium_api_v2alpha1.CiliumQoSPolicyList](cs.CiliumV2alpha1().CiliumQoSPolicies("")),
+		opts...,
+	)
+	return resource.New[*cilium_api_v2alpha1.CiliumQoSPolicy](lc, lw, mp, resource.WithMetric("CiliumQoSPolicy")), nil
+}

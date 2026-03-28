@@ -955,6 +955,9 @@ const (
 	// Network Policy.
 	EnableCiliumClusterwideNetworkPolicy = "enable-cilium-clusterwide-network-policy"
 
+	// EnableCiliumQoSPolicy enables support for Cilium QoS Policy.
+	EnableCiliumQoSPolicy = "enable-cilium-qos-policy"
+
 	// PolicyCIDRMatchMode defines the entities that CIDR selectors can reach
 	PolicyCIDRMatchMode = "policy-cidr-match-mode"
 
@@ -1811,6 +1814,9 @@ type DaemonConfig struct {
 	// Network Policy.
 	EnableCiliumClusterwideNetworkPolicy bool
 
+	// EnableCiliumQoSPolicy enables support for Cilium QoS Policy.
+	EnableCiliumQoSPolicy bool
+
 	// PolicyCIDRMatchMode is the list of entities that can be selected by CIDR policy.
 	// Currently supported values:
 	// - nodes
@@ -1901,6 +1907,8 @@ var (
 		EnableCiliumClusterwideNetworkPolicy: defaults.EnableCiliumClusterwideNetworkPolicy,
 		PolicyCIDRMatchMode:                  defaults.PolicyCIDRMatchMode,
 		MaxConnectedClusters:                 defaults.MaxConnectedClusters,
+
+		EnableCiliumQoSPolicy: defaults.EnableCiliumQoSPolicy,
 
 		BPFDistributedLRU:             defaults.BPFDistributedLRU,
 		BPFEventsDropEnabled:          defaults.BPFEventsDropEnabled,
@@ -2837,6 +2845,9 @@ func (c *DaemonConfig) Populate(logger *slog.Logger, vp *viper.Viper) {
 
 	// Enable BGP control plane features
 	c.EnableBGPControlPlane = vp.GetBool(EnableBGPControlPlane)
+
+	// Enable QoS features
+	c.EnableCiliumQoSPolicy = vp.GetBool(EnableCiliumQoSPolicy)
 
 	// Enable BGP control plane status reporting
 	c.EnableBGPControlPlaneStatusReport = vp.GetBool(EnableBGPControlPlaneStatusReport)
