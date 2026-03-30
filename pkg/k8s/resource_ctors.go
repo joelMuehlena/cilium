@@ -487,3 +487,17 @@ func ciliumEndpointSliceLocalPodIndexFunc(localNodeStore *node.LocalNodeStore, o
 	}
 	return indices, nil
 }
+
+// FIXME:
+func CiliumQoSPolicyResource(params CiliumResourceParams, opts ...func(*metav1.ListOptions)) (resource.Resource[*cilium_api_v2alpha1.CiliumQoSPolicy], error) {
+	if !params.ClientSet.IsEnabled() {
+		return nil, nil
+	}
+
+	lw := utils.ListerWatcherWithModifiers(
+		utils.ListerWatcherFromTyped[*cilium_api_v2alpha1.CiliumQoSPolicyList](params.ClientSet.CiliumV2alpha1().CiliumQoSPolicies("")),
+		opts...,
+	)
+
+	return resource.New[*cilium_api_v2alpha1.CiliumQoSPolicy](params.Lifecycle, lw, params.MetricsProvider, resource.WithMetric("CiliumQoSPolicy"), resource.WithCRDSync(params.CRDSyncPromise)), nil
+}

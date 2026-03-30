@@ -86,6 +86,9 @@ func agentCRDResourceNames() []string {
 		result = append(result, CRDResourceName(v2.BGPNCName))
 		result = append(result, CRDResourceName(v2.BGPNCOName))
 	}
+	if option.Config.EnableCiliumQoSPolicy {
+		result = append(result, CRDResourceName(v2alpha1.QoSPolicyName))
+	}
 
 	result = append(result,
 		CRDResourceName(v2.LBIPPoolName),

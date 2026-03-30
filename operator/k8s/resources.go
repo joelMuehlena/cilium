@@ -54,6 +54,7 @@ var (
 			k8s.NamespaceResource,
 			k8s.CiliumNetworkPolicyResource,
 			k8s.CiliumClusterwideNetworkPolicyResource,
+			k8s.CiliumQoSPolicyResource,
 		),
 	)
 )
@@ -73,6 +74,7 @@ type Resources struct {
 	CiliumNodes          resource.Resource[*cilium_api_v2.CiliumNode]
 	Pods                 resource.Resource[*slim_corev1.Pod]
 	Namespaces           resource.Resource[*slim_corev1.Namespace]
+	CiliumQoSPolicies    resource.Resource[*cilium_api_v2alpha1.CiliumQoSPolicy]
 }
 
 // HasCEWithIdentity returns true or false if the Cilium Endpoint store has

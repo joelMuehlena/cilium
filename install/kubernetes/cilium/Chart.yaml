@@ -169,3 +169,9 @@ annotations:
       displayName: Cilium Gateway Class Config
       description: |
         CiliumGatewayClassConfig defines a configuration for Gateway API GatewayClass.
+    - kind: CiliumQosPolicy
+      version: v2alpha1
+      name: ciliumqospolicies.cilium.io
+      displayName: Cilium QoS Policy
+      description: |
+        CiliumQosPolicy applies e.g. dscp markers to pod traffic

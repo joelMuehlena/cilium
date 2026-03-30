@@ -804,6 +804,9 @@ func InitGlobalFlags(logger *slog.Logger, cmd *cobra.Command, vp *viper.Viper) {
 	flags.MarkHidden(option.EnableNonDefaultDenyPolicies)
 	option.BindEnv(vp, option.EnableNonDefaultDenyPolicies)
 
+	flags.Bool(option.EnableCiliumQoSPolicy, defaults.EnableCiliumQoSPolicy, "Enable support for Cilium QoS policy")
+	option.BindEnv(vp, option.EnableCiliumQoSPolicy)
+
 	flags.Bool(option.EnableEndpointLockdownOnPolicyOverflow, false, "When an endpoint's policy map overflows, shutdown all (ingress and egress) network traffic for that endpoint.")
 	option.BindEnv(vp, option.EnableEndpointLockdownOnPolicyOverflow)
 
